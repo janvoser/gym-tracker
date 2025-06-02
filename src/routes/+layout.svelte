@@ -4,6 +4,7 @@
 </script>
 
 <style>
+  /* Navigationsleiste */
   .navbar {
     position: fixed;
     top: 20px;
@@ -24,11 +25,13 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   }
 
+  /* Linke Seite der Navbar: App-Titel */
   .nav-left {
     font-weight: bold;
     font-size: 1.2rem;
   }
 
+  /* Rechte Seite: Navigationslinks */
   .nav-left a {
     color: white;
     text-decoration: none;
@@ -46,6 +49,7 @@
     color: #ffe0ec;
   }
 
+  /* Hauptbereich unterhalb der fixen Navbar */
   main {
     padding-top: 120px;
     padding-left: 1rem;
@@ -53,7 +57,7 @@
   }
 </style>
 
-<!-- Moderne pinke Navbar -->
+<!-- Navigationsleiste mit vier Hauptseiten -->
 <div class="navbar">
   <div class="nav-left">
     <a href="/">GymTracker</a>
@@ -68,5 +72,5 @@
 
 <!-- Seiteninhalt -->
 <main>
-  {@render children()}
+  {@render children()} <!-- Darstellung des Inhalts, der zur aktuellen Route gehört -->
 </main>
