@@ -1,4 +1,5 @@
 <style>
+  /* Hintergrundbild und zentrierte Inhalte */
   .hero {
     background: url('/images/gym-background.jpg') no-repeat center center;
     background-size: cover;
@@ -11,31 +12,31 @@
     text-align: center;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   }
-
+  /* Dunkle halbtransparente Überlagerung für bessere Lesbarkeit */
   .overlay {
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(2px);
   }
-
+  /* Inhalt im Vordergrund */
   .content {
     position: relative;
     z-index: 1;
     max-width: 700px;
     padding: 2rem;
   }
-
+  /* Überschrift-Styling */
   h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
   }
-
+  /* Überschrift-Styling */
   p {
     font-size: 1.5rem;
     margin-bottom: 2rem;
   }
-
+  /* Action Button */
   .cta {
     background-color: #ff4081;
     color: white;
