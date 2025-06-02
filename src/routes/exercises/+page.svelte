@@ -1,3 +1,5 @@
+<!--Exercises Übersicht-->
+
 <script>
   let { data } = $props();
   let exercises = $state(data.exercises || []);
@@ -30,7 +32,7 @@
     return "Sonstiges";
   }
   
-  // Gefilterte Übungen
+  // Liefert Übungen gemäss aktivem Filter
   function getFilteredExercises() {
     if (selectedFilter === "Alle") {
       return exercises;
@@ -238,7 +240,7 @@
   
   {#if filteredExercises.length === 0}
     <div class="no-exercises">
-      <h3>🔍 Keine {selectedFilter}-Übungen gefunden</h3>
+      <h3>Keine {selectedFilter}-Übungen gefunden</h3>
       <p>Keine Übungen in dieser Kategorie vorhanden.</p>
     </div>
   {:else}
