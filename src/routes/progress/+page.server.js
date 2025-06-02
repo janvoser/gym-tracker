@@ -7,7 +7,7 @@ export async function load() {
   // Erstelle eine Liste aller einzigartigen Übungen aus den Workouts
   const uniqueExercises = [...new Set(workouts.map(w => w.exercise))];
   
-  // Hole für jede Übung alle Workouts
+  // Erstelle ein Objekt, das alle Workouts pro Übung gruppiert
   const progressData = {};
   for (const exercise of uniqueExercises) {
     const exerciseWorkouts = await db.getWorkoutsByExercise(exercise);
@@ -16,6 +16,7 @@ export async function load() {
     }
   }
   
+  // Rückgabe der gruppierten Daten 
   return { 
     progressData,
     exercises 
