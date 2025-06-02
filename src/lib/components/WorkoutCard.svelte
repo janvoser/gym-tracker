@@ -6,6 +6,7 @@
     isOpen = !isOpen;
   }
   
+   // Workout löschen mit Sicherheitsabfrage
   async function deleteWorkout() {
     const exerciseName = workout?.exercise || 'dieses Workout';
     const confirmed = confirm(`Workout "${exerciseName}" wirklich löschen?`);
@@ -113,6 +114,7 @@
   </div>
 {/if}
 
+<!-- Anzeige des Workouts in einer Karte -->
 {#if workout}
   <div class="card" on:click={toggle}>
     <div class="header">
