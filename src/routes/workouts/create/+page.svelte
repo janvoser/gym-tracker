@@ -1,17 +1,17 @@
 <script>
-  let { data } = $props();
+  let { data } = $props(); // Zugriff auf die geladenen Übungen
   const exercises = data.exercises || [];
   
   let selectedExerciseName = $state("");
   let selectedEquipment = $state("");
   let selectedExercise = $state(null);
   
-  // Vereinfachte Übung-Auswahl
+  // Funktion: reagiert auf Änderung der Übungsauswahl
   function handleExerciseChange(event) {
     selectedExerciseName = event.target.value;
     selectedEquipment = "";
     
-    // Exercise direkt suchen
+    // Suche das vollständige Übungsobjekt anhand des Namens
     if (selectedExerciseName) {
       selectedExercise = exercises.find(e => e.name === selectedExerciseName) || null;
     } else {
@@ -92,14 +92,16 @@
   }
 </style>
 
+<!-- Formular zum Erstellen eines neuen Workouts -->
 <div class="form-container">
-  {#if exercises.length === 0}
+  {#if exercises.length === 0} 
     <div class="error-message">
       <strong>Keine Übungen gefunden!</strong><br>
       Bitte fügen Sie erst Übungen zur Datenbank hinzu.
     </div>
   {:else}
     <form method="POST">
+      <!-- Übungsauswahl -->
       <div class="form-group">
         <label for="exercise">Übung:</label>
         <select name="exercise" id="exercise" bind:value={selectedExerciseName} onchange={handleExerciseChange} required>
@@ -110,6 +112,7 @@
         </select>
       </div>
 
+      <!-- Anzeige von Übungsdetails (Muskelgruppe, Beschreibung usw.) -->
       {#if selectedExercise}
         <div class="exercise-info">
           <div><strong>Muskelgruppe:</strong> {selectedExercise.muscleGroup || 'Nicht definiert'}</div>
@@ -131,21 +134,25 @@
         {/if}
       {/if}
 
+      <!-- Gewicht (in kg) -->
       <div class="form-group">
         <label for="weight">Gewicht (kg):</label>
         <input type="number" name="weight" id="weight" min="0" required />
       </div>
 
+      <!-- Wiederholungen (z. B. "3x10") -->
       <div class="form-group">
         <label for="reps">Wiederholungen:</label>
         <input type="text" name="reps" id="reps" placeholder="z. B. 3x10" required />
       </div>
 
+      <!-- Freitextnotizen -->
       <div class="form-group">
         <label for="notes">Notizen:</label>
         <textarea name="notes" id="notes" rows="2"></textarea>
       </div>
 
+      <!-- Datumsauswahl -->
       <div class="form-group">
         <label for="date">Datum:</label>
         <input type="date" name="date" id="date" required />
