@@ -1,3 +1,4 @@
+<!-- Fortschrittsanzeige (Progress View)-->
 <script>
     import { onMount } from 'svelte';
     import * as d3 from 'd3';
@@ -16,20 +17,20 @@
     function updateChart() {
       if (!selectedExercise || !chartContainer) return;
       
-      // Clear previous chart
+      // Vorherige Zeichnung löschen
       d3.select(chartContainer).selectAll("*").remove();
       
       const workouts = data.progressData[selectedExercise];
       if (!workouts || workouts.length === 0) return;
       
-      // Daten vorbereiten
+      // Workouts aufbereiten
       const chartData = workouts.map(w => ({
         date: new Date(w.date),
         weight: w.weight,
         reps: w.reps
       }));
       
-      // SVG Setup
+      // SVG-Grundelement erstellen
       const svg = d3.select(chartContainer)
         .append("svg")
         .attr("width", width)
@@ -38,22 +39,23 @@
       const g = svg.append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
       
-      // Scales
+      // Zeitachse X
       const xScale = d3.scaleTime()
         .domain(d3.extent(chartData, d => d.date))
         .range([0, width - margin.left - margin.right]);
       
+      // Gewichtsskala Y
       const yScale = d3.scaleLinear()
         .domain([0, d3.max(chartData, d => d.weight) * 1.1])
         .range([height - margin.top - margin.bottom, 0]);
       
-      // Line generator
+      // Linie generieren (Gewicht über Zeit)
       const line = d3.line()
         .x(d => xScale(d.date))
         .y(d => yScale(d.weight))
         .curve(d3.curveMonotoneX);
       
-      // Add X axis
+      // X-Achse hinzufügen
       g.append("g")
         .attr("transform", `translate(0,${height - margin.top - margin.bottom})`)
         .call(d3.axisBottom(xScale)
@@ -65,7 +67,7 @@
         .style("fill", "#fff")
         .text("Datum");
       
-      // Add Y axis
+      // Y-Achse hinzufügen
       g.append("g")
         .call(d3.axisLeft(yScale))
         .append("text")
@@ -75,13 +77,13 @@
         .style("fill", "#fff")
         .text("Gewicht (kg)");
       
-      // Style axes
+      // Achsenstyling
       g.selectAll(".domain, .tick line")
         .style("stroke", "#666");
       g.selectAll(".tick text")
         .style("fill", "#ccc");
       
-      // Add gradient
+      // Farbverlauf für Fläche definieren
       const gradient = svg.append("defs")
         .append("linearGradient")
         .attr("id", "line-gradient")
@@ -106,12 +108,13 @@
         .y1(d => yScale(d.weight))
         .curve(d3.curveMonotoneX);
       
+       // Fläche zeichnen 
       g.append("path")
         .datum(chartData)
         .attr("fill", "url(#line-gradient)")
         .attr("d", area);
       
-      // Add the line
+      // Linie zeichnen
       g.append("path")
         .datum(chartData)
         .attr("fill", "none")
@@ -119,7 +122,7 @@
         .attr("stroke-width", 3)
         .attr("d", line);
       
-      // Add dots for each workout
+      // Punkte für jedes Workout
       g.selectAll(".dot")
         .data(chartData)
         .enter().append("circle")
