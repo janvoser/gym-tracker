@@ -5,6 +5,6 @@ export default {
     adapter: adapter()
   },
   compilerOptions: {
-    runes: true  // ← Das hinzufügen!
+    runes: true  
   }
 };
