@@ -5,9 +5,9 @@ const client = new MongoClient(MONGODB_URI);
 await client.connect();
 const db = client.db("gymtracker");
 
-//////////////////////////////////////////
+
 // Workouts
-//////////////////////////////////////////
+
 
 async function getWorkouts() {
   try {
@@ -71,9 +71,9 @@ async function deleteWorkout(id) {
   }
 }
 
-//////////////////////////////////////////
+
 // Exercises (Übungen)
-//////////////////////////////////////////
+
 
 async function getExercises() {
   try {
@@ -87,7 +87,7 @@ async function getExercises() {
   }
 }
 
-// NEU: Einzelne Übung abrufen
+//Einzelne Übung abrufen
 async function getExercise(id) {
   try {
     const collection = db.collection("exercises");
@@ -100,9 +100,9 @@ async function getExercise(id) {
   }
 }
 
-//////////////////////////////////////////
+
 // Progress Tracking
-//////////////////////////////////////////
+
 
 async function getWorkoutsByExercise(exerciseName) {
   try {
