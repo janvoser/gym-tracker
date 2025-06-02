@@ -87,7 +87,8 @@ async function getExercises() {
   }
 }
 
-//Einzelne Übung abrufen
+// NEU: Einzelne Übung abrufen
+
 async function getExercise(id) {
   try {
     const collection = db.collection("exercises");
