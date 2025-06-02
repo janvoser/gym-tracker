@@ -1,9 +1,10 @@
+<!--Workout Übersicht-->
 <script>
   import WorkoutCard from '$lib/components/WorkoutCard.svelte';
 
   let { data } = $props();
   let workouts = $state(data.workouts || []);
-  let sortNewestFirst = $state(true);
+  let sortNewestFirst = $state(true); // Sortierreihenfolge
   let selectedExercise = $state("Alle"); // Übungs-Filter
 
   // Alle einzigartigen Übungen extrahieren
@@ -40,7 +41,7 @@
     return workoutsCopy;
   }
 
-  // Direkter Aufruf statt $derived
+  // Zustand für das Ergebnis nach Filter + Sortierung
   let filteredAndSortedWorkouts = $state([]);
   
   // Workouts aktualisieren wenn sich was ändert
@@ -48,11 +49,13 @@
     filteredAndSortedWorkouts = getSortedAndFilteredWorkouts();
   });
 
+  // Umschalten der Sortierreihenfolge (neu alt)
   function toggleSort() {
     sortNewestFirst = !sortNewestFirst;
     filteredAndSortedWorkouts = getSortedAndFilteredWorkouts();
   }
 
+  // Workout löschen (per ID)
   async function handleDelete(id) {
     if (!id) return;
     
@@ -115,6 +118,7 @@
     flex-wrap: wrap;
   }
 
+  /* Sortier-Button */
   .sort-button {
     padding: 0.75rem 1.5rem;
     border-radius: 1rem;
@@ -140,6 +144,7 @@
     align-items: center;
   }
   
+  /* Dropdown zur Übungswahl */
   .exercise-select {
     padding: 0.75rem 1.5rem;
     border-radius: 1rem;
@@ -187,6 +192,7 @@
     text-decoration: underline;
   }
 
+  /* Liste aller Workouts */
   .workout-list {
     display: flex;
     flex-direction: column;
