@@ -1,5 +1,5 @@
 <script>
-  let { data } = $props();
+  let { data } = $props(); // Empfängt ein einzelnes Workout über data.workout
 </script>
 
 <h1>Workout Detail</h1>
