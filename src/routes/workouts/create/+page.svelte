@@ -1,3 +1,4 @@
+<!--Workout erstellen-->
 <script>
   let { data } = $props(); // Zugriff auf die geladenen Übungen
   const exercises = data.exercises || [];
