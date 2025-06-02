@@ -8,7 +8,7 @@ export async function load() {
 
 export const actions = {
   default: async ({ request }) => {
-    console.log("🚀 WORKOUT WIRD ERSTELLT...");
+    console.log("WORKOUT WIRD ERSTELLT...");
     const formData = await request.formData();
     
     const newWorkout = {
@@ -20,7 +20,7 @@ export const actions = {
       date: formData.get("date")
     };
 
-    console.log("📋 Formular Daten:", newWorkout);
+    console.log("Formular Daten:", newWorkout);
 
     const exerciseFromDb = await db.getExercises();
     const matching = exerciseFromDb.find(e => e.name === newWorkout.exercise);
@@ -29,17 +29,18 @@ export const actions = {
       newWorkout.description = matching.description;
     }
 
-    console.log("📋 Workout vor Speichern:", newWorkout);
+    console.log("Workout vor Speichern:", newWorkout);
     
+    // Speichern in der Datenbank
     const result = await db.createWorkout(newWorkout);
     
-    console.log("✅ Speicher-Ergebnis:", result);
+    console.log("Speicher-Ergebnis:", result);
     
     if (result) {
-      console.log("✅ ERFOLG - Weiterleitung zu /workouts");
+      console.log("ERFOLG - Weiterleitung zu /workouts");
       throw redirect(303, '/workouts');
     } else {
-      console.log("❌ FEHLER beim Speichern");
+      console.log("FEHLER beim Speichern");
       return { success: false, error: "Fehler beim Speichern" };
     }
   }
