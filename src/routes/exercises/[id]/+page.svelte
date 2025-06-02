@@ -1,3 +1,4 @@
+<!--Exercises Detailübersicht-->
 <script>
     let { data } = $props();
     let exercise = data.exercise;
